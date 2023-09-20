@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>All Notes</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div class="container my-2">
+    <h1>Note List</h1>
+
+    <a th:href="@{/note/create}" class="btn btn-primary btn-sm mb-3"> Add Note </a>
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Note Id</th>
+            <th>Note Title</th>
+            <th>Note Content </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="note : ${alllist}" class="col">
+            <td  th:text="${note.id}"></td>
+            <td  th:text="${note.title}"></td>
+            <td  th:text="${note.content}"></td>
+            <td> <a th:href="@{/note/edit(id=${note.id})}" class="btn btn-primary">Update</a>
+                <form th:action="@{/note/delete}" method="post" class="d-inline">
+                    <input type="hidden" name="id" th:value="${note.id}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
